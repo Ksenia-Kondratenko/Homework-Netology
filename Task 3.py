@@ -105,7 +105,7 @@ class Student:
 lecturer1 = Lecturer('Иван', 'Иванов')
 lecturer2 = Lecturer('Пётр', 'Петров')
 
-student1 = Student('Руой', 'Еман', 'Женский')
+student1 = Student('Ольга', 'Иванова', 'Женский')
 student2 = Student('Кирилл', 'Романов', 'Мужской')
 
 lecturer1.add_grade('Python', 9.5)

@@ -96,7 +96,7 @@ lecturer2 = Lecturer('Пётр', 'Петров')
 reviewer1 = Reviewer('Михаил', 'Сидоров')
 reviewer2 = Reviewer('Анна', 'Кузнецова')
 
-student1 = Student('Руой', 'Еман', 'Мужской')
+student1 = Student('Олег', 'Семёнов', 'Мужской')
 student2 = Student('Кирилл', 'Романов', 'Мужской')
 
 lecturer1.attach_course('Python')

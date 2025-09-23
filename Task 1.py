@@ -8,10 +8,10 @@ class Mentor:
         self.courses_attached.append(course)
 
 class Lecturer(Mentor):
-    pass  
+    pass  # пока пустой
 
 class Reviewer(Mentor):
-    pass  
+    pass  # пока пустой
 
 lecturer = Lecturer('Иван', 'Иванов')
 reviewer = Reviewer('Пётр', 'Петров')
