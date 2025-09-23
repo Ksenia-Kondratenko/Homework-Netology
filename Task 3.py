@@ -1,6 +1,5 @@
 from statistics import mean
 
-# Родительский класс преподавателя
 class Mentor:
     def __init__(self, name, surname):
         self.name = name
@@ -10,7 +9,6 @@ class Mentor:
     def attach_course(self, course):
         self.courses_attached.append(course)
 
-# Класс лектора (получает оценки от студентов)
 class Lecturer(Mentor):
     def __init__(self, name, surname):
         super().__init__(name, surname)
@@ -23,7 +21,7 @@ class Lecturer(Mentor):
             self.grades_from_students[course] = [grade]
 
     def average_grade(self):
-        # Рассчитать среднюю оценку по всем курсам
+        # средняя оценка по всем курсам
         all_grades = [grade for grades in self.grades_from_students.values() for grade in grades]
         if all_grades:
             return round(mean(all_grades), 1)
@@ -48,7 +46,6 @@ class Lecturer(Mentor):
             return self.average_grade() > other.average_grade()
         return NotImplemented
 
-# Класс проверяющего (ставит оценки студентам)
 class Reviewer(Mentor):
     def __init__(self, name, surname):
         super().__init__(name, surname)
@@ -56,7 +53,6 @@ class Reviewer(Mentor):
     def __str__(self):
         return f"Имя: {self.name}\nФамилия: {self.surname}"
 
-# Класс студента (ставит оценки лекторам и получает оценки от проверяющих)
 class Student:
     def __init__(self, name, surname, gender):
         self.name = name
@@ -73,7 +69,7 @@ class Student:
             self.grades[course] = [grade]
 
     def average_grade(self):
-        # Рассчитать среднюю оценку по всем курсам
+        # средняя оценка по всем курсам
         all_grades = [grade for grades in self.grades.values() for grade in grades]
         if all_grades:
             return round(mean(all_grades), 1)
@@ -106,14 +102,12 @@ class Student:
             return self.average_grade() > other.average_grade()
         return NotImplemented
 
-# Примеры использования
 lecturer1 = Lecturer('Иван', 'Иванов')
 lecturer2 = Lecturer('Пётр', 'Петров')
 
 student1 = Student('Руой', 'Еман', 'Женский')
 student2 = Student('Кирилл', 'Романов', 'Мужской')
 
-# Назначим некоторые оценки
 lecturer1.add_grade('Python', 9.5)
 lecturer1.add_grade('Python', 9.8)
 lecturer2.add_grade('Python', 8.5)
@@ -124,19 +118,17 @@ student1.add_grade('Python', 9.5)
 student2.add_grade('Python', 8.0)
 student2.add_grade('Python', 8.5)
 
-# Добавим курсы
 student1.courses_in_progress = ['Python', 'Git']
 student1.finished_courses = ['Введение в программирование']
 
 student2.courses_in_progress = ['Python']
 student2.finished_courses = ['Основы программирования']
 
-# Посмотрим на строки
 print(student1)
 print(student2)
 print(lecturer1)
 print(lecturer2)
 
-# Сравниваем
-print(lecturer1 > lecturer2)  # Должно вернуть True
-print(student1 > student2)    # Должно вернуть True
+# сравнение
+print(lecturer1 > lecturer2)  # True
+print(student1 > student2)    # True

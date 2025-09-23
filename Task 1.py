@@ -1,30 +1,23 @@
-# Основной класс преподавателя
 class Mentor:
     def __init__(self, name, surname):
         self.name = name
         self.surname = surname
-        self.courses_attached = []  # Закрепленные курсы
+        self.courses_attached = []
 
     def attach_course(self, course):
-        """Метод добавляет курс к списку прикрепленных курсов."""
         self.courses_attached.append(course)
 
-# Класс лектора (читается лекции, но не проверяет задания)
 class Lecturer(Mentor):
-    pass  # Ничего дополнительного не добавляем пока
+    pass  
 
-# Класс эксперта-проверяющего (ставит оценки студентам)
 class Reviewer(Mentor):
-    pass  # Ничего дополнительного не добавляем пока
+    pass  
 
-# Создаем объекты
 lecturer = Lecturer('Иван', 'Иванов')
 reviewer = Reviewer('Пётр', 'Петров')
 
-# Проверяем принадлежность к классу Mentor
-print(isinstance(lecturer, Mentor))  # Должно вывести True
-print(isinstance(reviewer, Mentor))  # Должно вывести True
+print(isinstance(lecturer, Mentor))  # True
+print(isinstance(reviewer, Mentor))  # True
 
-# Показываем прикрепленные курсы (их изначально нет)
-print(lecturer.courses_attached)     # Должно вывести пустой список []
-print(reviewer.courses_attached)     # Должно вывести пустой список []
+print(lecturer.courses_attached)     # пустой список []
+print(reviewer.courses_attached)     # пустой список []

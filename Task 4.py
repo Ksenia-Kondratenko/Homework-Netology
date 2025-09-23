@@ -1,6 +1,5 @@
 from statistics import mean
 
-# Родительский класс преподавателя
 class Mentor:
     def __init__(self, name, surname):
         self.name = name
@@ -10,7 +9,6 @@ class Mentor:
     def attach_course(self, course):
         self.courses_attached.append(course)
 
-# Класс лектора (получает оценки от студентов)
 class Lecturer(Mentor):
     def __init__(self, name, surname):
         super().__init__(name, surname)
@@ -24,16 +22,15 @@ class Lecturer(Mentor):
 
     def average_grade(self, course=None):
         if course is None:
-            # Среднее по всем курсам
+            # Среднее значение по всем курсам
             all_grades = [grade for grades in self.grades_from_students.values() for grade in grades]
         else:
-            # Среднее по указанному курсу
+            # Среднее значение по конкретному курсу
             all_grades = self.grades_from_students.get(course, [])
         if all_grades:
             return round(mean(all_grades), 1)
         return None
 
-# Класс проверяющего (ставит оценки студентам)
 class Reviewer(Mentor):
     def __init__(self, name, surname):
         super().__init__(name, surname)
@@ -47,7 +44,6 @@ class Reviewer(Mentor):
         else:
             return 'Ошибка'
 
-# Класс студента (ставит оценки лекторам и получает оценки от проверяющих)
 class Student:
     def __init__(self, name, surname, gender):
         self.name = name
@@ -68,13 +64,13 @@ class Student:
             # Среднее по всем курсам
             all_grades = [grade for grades in self.grades.values() for grade in grades]
         else:
-            # Среднее по указанному курсу
+            # Среднее по конкретному курсу
             all_grades = self.grades.get(course, [])
         if all_grades:
             return round(mean(all_grades), 1)
         return None
 
-# Функция подсчета средней оценки за домашние задания по всем студентам на одном курсе
+# подсчёт средней оценки за домашние задания по всем студентам на одном курсе
 def average_home_work_grade(students, course):
     grades = []
     for student in students:
@@ -84,7 +80,7 @@ def average_home_work_grade(students, course):
         return round(mean(grades), 1)
     return None
 
-# Функция подсчета средней оценки за лекции всех лекторов на одном курсе
+# подсчёт средней оценки за лекции всех лекторов на одном курсе
 def average_lecture_grade(lecturers, course):
     grades = []
     for lecturer in lecturers:
@@ -94,7 +90,6 @@ def average_lecture_grade(lecturers, course):
         return round(mean(grades), 1)
     return None
 
-# Экземпляры классов
 lecturer1 = Lecturer('Иван', 'Иванов')
 lecturer2 = Lecturer('Пётр', 'Петров')
 
@@ -104,7 +99,6 @@ reviewer2 = Reviewer('Анна', 'Кузнецова')
 student1 = Student('Руой', 'Еман', 'Мужской')
 student2 = Student('Кирилл', 'Романов', 'Мужской')
 
-# Привяжем курсы
 lecturer1.attach_course('Python')
 lecturer2.attach_course('Python')
 
@@ -114,26 +108,26 @@ reviewer2.attach_course('Python')
 student1.courses_in_progress = ['Python']
 student2.courses_in_progress = ['Python']
 
-# Проверяющие выставляют оценки студентам
+# оценки студентам от проверяющих
 reviewer1.rate_hw(student1, 'Python', 9)
 reviewer1.rate_hw(student2, 'Python', 8)
 
 reviewer2.rate_hw(student1, 'Python', 10)
 reviewer2.rate_hw(student2, 'Python', 7)
 
-# Студенты оценивают лекции
+# оценки лекций от студентов
 student1.add_grade('Python', 9.5)
 student2.add_grade('Python', 8.5)
 
 lecturer1.add_grade('Python', 9.5)
 lecturer2.add_grade('Python', 8.5)
 
-# Подсчёт средней оценки за домашние задания и лекции
+# средняя оценка за домашние задания и лекции
 students = [student1, student2]
 lecturers = [lecturer1, lecturer2]
 
 hw_avg = average_home_work_grade(students, 'Python')
 lecture_avg = average_lecture_grade(lecturers, 'Python')
 
-print(hw_avg)          # Средняя оценка за домашнюю работу
-print(lecture_avg)     # Средняя оценка за лекции
+print(hw_avg)          # средняя оценка за домашнюю работу
+print(lecture_avg)     # средняя оценка за лекции
