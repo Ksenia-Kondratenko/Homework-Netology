@@ -102,21 +102,21 @@ class Student:
             return self.average_grade() > other.average_grade()
         return NotImplemented
 
+    # добавление rate_lecture для выставления оценки лектору
+    def rate_lecture(self, lecturer, course, grade):
+        if isinstance(lecturer, Lecturer) and course in lecturer.courses_attached and course in self.courses_in_progress:
+            lecturer.add_grade(course, grade)
+        else:
+            return 'Ошибка'
+
 lecturer1 = Lecturer('Иван', 'Иванов')
 lecturer2 = Lecturer('Пётр', 'Петров')
 
 student1 = Student('Ольга', 'Иванова', 'Женский')
 student2 = Student('Кирилл', 'Романов', 'Мужской')
 
-lecturer1.add_grade('Python', 9.5)
-lecturer1.add_grade('Python', 9.8)
-lecturer2.add_grade('Python', 8.5)
-lecturer2.add_grade('Python', 8.8)
-
-student1.add_grade('Python', 9.0)
-student1.add_grade('Python', 9.5)
-student2.add_grade('Python', 8.0)
-student2.add_grade('Python', 8.5)
+lecturer1.attach_course('Python')
+lecturer2.attach_course('Python')
 
 student1.courses_in_progress = ['Python', 'Git']
 student1.finished_courses = ['Введение в программирование']
@@ -124,11 +124,20 @@ student1.finished_courses = ['Введение в программировани
 student2.courses_in_progress = ['Python']
 student2.finished_courses = ['Основы программирования']
 
+# Студент Ольга Иванова ставит оценку лектору Ивану Иванову
+student1.rate_lecture(lecturer1, 'Python', 9.5)
+
+# Студент Кирилл Романов ставит оценку лектору Петру Петрову
+student2.rate_lecture(lecturer2, 'Python', 8.5)
+
+print(lecturer1.grades_from_students)  # {'Python': [9.5]}
+print(lecturer2.grades_from_students)  # {'Python': [8.5]}
+
 print(student1)
 print(student2)
 print(lecturer1)
 print(lecturer2)
 
-# сравнение
+# Сравнение
 print(lecturer1 > lecturer2)  # True
-print(student1 > student2)    # True
+print(student1 > student2)    # Нет оценок, поэтому сравнение невозможно
